@@ -1,0 +1,15 @@
+a = load '/home/acadgild/student' using PigStorage(',') AS (name:chararray,col:chararray,dob:chararray,stream:chararray,grade:float,state:chararray,city:chararray);
+b = filter a by grade < 5 ;
+c = group b all;
+d = foreach e generate COUNT(b.name) as count;
+dump d;
+e = filter a by state == 'alaska';
+f = foreach e generate name;
+dump f;
+g = filter a by state == 'alabama' AND col == 'government' ;
+h = group g all;
+i = FOREACH h GENERATE COUNT(g.col) ;
+dump i;
+j = FILTER a BY stream == 'BE' AND state == 'oregon' ;
+k = FOREACH j GENERATE name;
+dump k;
